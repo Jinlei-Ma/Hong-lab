@@ -1,0 +1,1893 @@
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-soft: #f7f5f1;
+  --surface-muted: #f2eee8;
+  --ink: #232323;
+  --ink-soft: #666666;
+  --line: #e6e0d8;
+  --line-strong: #d2c7b9;
+  --brand: #8f2018;
+  --brand-deep: #6e160f;
+  --accent: #b4986b;
+  --container: min(1220px, calc(100vw - 48px));
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua",
+    "Source Han Serif SC", "Noto Serif SC", serif;
+  --font-sans: "Avenir Next", "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.pageBackdrop {
+  display: none;
+}
+
+.container {
+  width: var(--container);
+  margin: 0 auto;
+}
+
+.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--brand);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.siteHeader .container {
+  width: 100%;
+  max-width: none;
+  padding: 0 26px;
+  margin: 0;
+}
+
+.siteHeaderInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 68px;
+}
+
+.brandBlock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.brandCopy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 0;
+}
+
+.brandCopy strong {
+  color: white;
+  font-family: var(--font-display);
+  font-size: 2.35rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.desktopNav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 34px;
+  margin-left: auto;
+}
+
+.navLink,
+.mobileNavLink {
+  transition: opacity 160ms ease, color 160ms ease;
+}
+
+.navLink {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.34rem;
+  line-height: 68px;
+  position: relative;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  height: 2px;
+  background: transparent;
+}
+
+.navLink:hover,
+.navLink.active {
+  color: white;
+}
+
+.navLink.active::after {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.mobileMenu {
+  display: none;
+}
+
+.homeHero {
+  padding: 0;
+  background: var(--surface);
+}
+
+.homeHeroFigure {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.homeHeroImage {
+  display: block;
+  width: 100%;
+  height: min(720px, calc(100vh - 42px));
+  object-fit: cover;
+  object-position: center 24%;
+}
+
+.homeHeroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.42)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.06) 42%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.homeHeroCaption {
+  position: absolute;
+  left: 50%;
+  top: 32%;
+  transform: translate(-50%, -50%);
+  width: min(88%, 760px);
+  text-align: center;
+  color: white;
+}
+
+.homeHeroCaption h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 5.4vw, 4.3rem);
+  line-height: 1.05;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+}
+
+.homeHeroCaption p {
+  margin: 10px 0 0;
+  font-size: clamp(1.08rem, 1.7vw, 1.38rem);
+  line-height: 1.45;
+  font-weight: 600;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
+}
+
+.homeHeroButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 188px;
+  min-height: 46px;
+  margin-top: 18px;
+  padding: 0 22px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #1d4d95;
+  font-size: 0.96rem;
+  font-weight: 700;
+}
+
+.heroCarousel {
+  position: relative;
+  min-height: calc(100vh - 72px);
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.heroSlide {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 680ms ease, transform 680ms ease;
+}
+
+.heroSlide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.heroSlide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.42)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0.46) 100%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 72px);
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  padding: 120px 0 104px;
+}
+
+.heroCopy {
+  max-width: 880px;
+  text-align: center;
+}
+
+.heroEyebrow,
+.sectionEyebrow,
+.footerEyebrow {
+  display: inline-block;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+}
+
+.heroEyebrow {
+  color: rgba(255, 255, 255, 0.86);
+  margin-bottom: 18px;
+}
+
+.heroCopy h1,
+.pageHeroCopy h1,
+.sectionHeading h2,
+.siteFooter h2,
+.siteFooter h3,
+.memberGroupHeader h3,
+.contactCardHeader h3,
+.highlightCard h3,
+.ctaCard h3,
+.newsCard h3,
+.researchCard h3,
+.admissionCard h3 {
+  font-family: var(--font-display);
+}
+
+.heroCopy h1,
+.pageHeroCopy h1 {
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  line-height: 1.05;
+  color: white;
+}
+
+.heroCopy p,
+.pageHeroCopy p {
+  margin: 20px auto 0;
+  max-width: 48rem;
+  font-size: 1.12rem;
+  line-height: 1.8;
+}
+
+.heroCopy p {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.heroActions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 170px;
+  min-height: 50px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  transition: background-color 160ms ease, color 160ms ease,
+    border-color 160ms ease;
+}
+
+.primaryButton {
+  background: white;
+  color: #244d9f;
+}
+
+.secondaryButton {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.72);
+  color: white;
+}
+
+.ctaCard .primaryButton,
+.contactCard .primaryButton {
+  background: var(--brand);
+  color: white;
+}
+
+.heroArrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 76px;
+  height: 76px;
+  margin-top: -38px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.heroArrowLeft {
+  left: 26px;
+}
+
+.heroArrowRight {
+  right: 26px;
+}
+
+.heroDots {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  z-index: 2;
+  display: flex;
+  gap: 10px;
+  transform: translateX(-50%);
+}
+
+.heroDot {
+  width: 28px;
+  height: 4px;
+  padding: 0;
+  border: 0;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+}
+
+.heroDot.active {
+  background: white;
+}
+
+.homeIntroBand {
+  background: rgb(247, 247, 247);
+}
+
+.homeSections {
+  padding: 0 0 88px;
+}
+
+.sectionBlock {
+  padding: 0 0 56px;
+  margin-bottom: 56px;
+  border-bottom: 1px solid var(--line);
+}
+
+#home-intro {
+  scroll-margin-top: 110px;
+  padding: 54px 34px 60px;
+  margin-top: 0;
+  margin-bottom: 0;
+  background: transparent;
+  border-bottom: 0;
+}
+
+.tone-muted {
+  padding: 34px;
+  background: var(--surface-soft);
+  border-bottom: 0;
+}
+
+.tone-brand {
+  padding: 34px;
+  background: #faf6f0;
+  border-top: 2px solid var(--brand);
+  border-bottom: 0;
+}
+
+.sectionHeading {
+  max-width: 52rem;
+  margin-bottom: 28px;
+}
+
+#home-intro .sectionHeading {
+  max-width: 42rem;
+  margin-bottom: 30px;
+}
+
+.sectionEyebrow,
+.footerEyebrow {
+  color: var(--brand);
+  margin-bottom: 12px;
+}
+
+.sectionHeading h2,
+.siteFooter h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.18;
+}
+
+.sectionHeading p,
+.proseBlock p,
+.asideCard p,
+.highlightCard p,
+.ctaCard p,
+.researchCard p,
+.bulletCard p,
+.emptyState p,
+.memberCopy p,
+.newsCard p,
+.homeFootnote,
+.contactCardHeader p {
+  color: var(--ink-soft);
+  line-height: 1.9;
+}
+
+.sectionHeading p {
+  margin: 14px 0 0;
+}
+
+.splitShowcase {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(340px, 0.9fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.splitShowcaseMission {
+  grid-template-columns: minmax(0, 1.04fr) minmax(440px, 0.96fr);
+  gap: 54px;
+  align-items: start;
+}
+
+.proseBlock p {
+  margin: 0 0 16px;
+  font-size: 1.04rem;
+}
+
+.proseBlock p:last-child,
+.asideCard p:last-child,
+.highlightCard p:last-child,
+.ctaCard p:last-child,
+.researchCard p:last-child,
+.memberCopy p:last-child {
+  margin-bottom: 0;
+}
+
+.imagePanel {
+  min-height: 400px;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.missionImageFrame {
+  width: 100%;
+  aspect-ratio: 1.32 / 1;
+  overflow: hidden;
+}
+
+.missionImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 52%;
+}
+
+.imagePanelBadge {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  padding: 16px 18px;
+  background: rgba(0, 0, 0, 0.56);
+  color: white;
+}
+
+.imagePanelBadge span {
+  display: block;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.8rem;
+}
+
+.quickLinkGrid,
+.statGrid,
+.ctaGrid,
+.highlightGrid,
+.researchGrid,
+.placeholderGrid,
+.bulletCardGrid,
+.admissionGrid,
+.infoGrid,
+.memberCardGrid {
+  display: grid;
+  gap: 24px;
+}
+
+.quickLinkGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.quickLinkCard,
+.statCard,
+.ctaCard,
+.highlightCard,
+.researchCard,
+.bulletCard,
+.emptyState,
+.admissionCard,
+.infoCard,
+.linkCard,
+.memberCard,
+.contactCard,
+.asideCard,
+.newsCard,
+.memberGroup {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.quickLinkCard,
+.statCard,
+.ctaCard,
+.highlightCard,
+.researchCard,
+.bulletCard,
+.emptyState,
+.admissionCard,
+.infoCard,
+.memberCard,
+.newsCard,
+.contactCard,
+.asideCard {
+  padding: 24px;
+}
+
+.quickLinkCard strong,
+.ctaCard h3,
+.highlightCard h3,
+.researchCard h3,
+.admissionCard h3,
+.newsCard h3,
+.contactCardHeader h3 {
+  font-size: 1.28rem;
+  line-height: 1.35;
+}
+
+.quickLinkCard p,
+.quickLinkCard span,
+.statCard span,
+.statCard strong,
+.infoCard span,
+.infoCard strong,
+.plainMetaList,
+.footerList,
+.linkCard span,
+.requirementRow dt,
+.requirementRow dd,
+.workflowList li {
+  line-height: 1.8;
+}
+
+.quickLinkCard span {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.statGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.statCard span,
+.infoCard span {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.statCard strong,
+.infoCard strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.12rem;
+}
+
+.highlightGrid,
+.ctaGrid,
+.placeholderGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.highlightGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.homeFootnote {
+  margin: 22px 0 0;
+}
+
+.pageHero {
+  padding: 56px 0 34px;
+  background: var(--surface);
+}
+
+.pageHeroInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 40px;
+  align-items: end;
+}
+
+.pageHeroCopy {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.pageHeroCopy .heroEyebrow {
+  color: var(--brand);
+}
+
+.pageHeroCopy h1 {
+  color: var(--ink);
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+}
+
+.pageHeroCopy p {
+  color: var(--ink-soft);
+  margin-left: 0;
+}
+
+.pageHeroAside {
+  display: grid;
+  gap: 12px;
+}
+
+.pageHeroBadge {
+  padding: 18px 20px;
+  background: var(--surface-soft);
+  border-left: 4px solid var(--brand);
+}
+
+.pageHeroBadge span {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.pageHeroBadge strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 1rem;
+}
+
+.pageBody {
+  padding: 40px 0 88px;
+}
+
+.pageBodyGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 40px;
+  align-items: start;
+}
+
+.pageMain {
+  min-width: 0;
+}
+
+.pageAside {
+  position: sticky;
+  top: 96px;
+  display: grid;
+  gap: 18px;
+}
+
+.profilePage {
+  padding: 0;
+  background: #f3f3f3;
+}
+
+.profileWideFrame {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.profileFrame {
+  background: white;
+  border: 0;
+  box-shadow: none;
+}
+
+.profileLayout {
+  display: grid;
+  grid-template-columns: 392px minmax(0, 1fr);
+}
+
+.profileSidebar {
+  background: #dfdfdf;
+  padding: 22px 16px 30px;
+}
+
+.profilePortraitCard {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 26px;
+}
+
+.profilePortraitImage {
+  display: block;
+  width: 212px;
+  height: 318px;
+  object-fit: cover;
+  border: 0;
+}
+
+.profileSidebarName {
+  margin: -26px 0 6px;
+  color: #202020;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.profileMetaList {
+  display: grid;
+  gap: 16px;
+  padding-left: 8px;
+}
+
+.profileMetaItem {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 0 14px;
+  align-items: start;
+}
+
+.profileMetaLabel {
+  color: #181818;
+  font-size: 0.94rem;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.profileMetaValue {
+  color: #1f1f1f;
+  font-size: 0.94rem;
+  line-height: 1.9;
+}
+
+.profileActionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.profileActionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+.profileActionButton.primary {
+  background: #0d47b7;
+  color: white;
+}
+
+.profileActionButton.secondary {
+  background: #8e8e8e;
+  color: white;
+}
+
+.profileActionButton.full {
+  grid-column: 1 / -1;
+}
+
+.profileActionIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.profileActionIcon::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.profileContentArea {
+  padding: 20px 28px 36px;
+}
+
+.profileSection {
+  padding: 0 0 44px;
+}
+
+.profileSectionHeading {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+.profileSection h2 {
+  display: inline-block;
+  margin: 0;
+  padding-bottom: 10px;
+  color: #151515;
+  font-family: var(--font-display);
+  font-size: 1.95rem;
+  font-weight: 700;
+  border-bottom: 3px solid #b00000;
+}
+
+.profileSectionBody {
+  display: grid;
+  gap: 10px;
+}
+
+.profileSectionBody p {
+  margin: 0;
+  color: #2f2f2f;
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.facultyListPage {
+  padding: 32px 0 72px;
+  background: #f3f3f3;
+}
+
+.facultyListFrame {
+  background: white;
+  border: 1px solid #d6d6d6;
+  padding: 28px;
+}
+
+.facultyListHeader {
+  margin-bottom: 26px;
+}
+
+.facultyListHeader h1 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+}
+
+.facultyListHeader p {
+  margin: 0;
+  color: #666;
+}
+
+.facultyListGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.facultyListCard {
+  padding: 22px;
+  border: 1px solid #e0e0e0;
+  background: #fafafa;
+}
+
+.facultyListCard h2 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.facultyListTitle {
+  margin: 0 0 10px;
+  color: #8f2018;
+  font-weight: 700;
+}
+
+.facultyListCard p {
+  margin: 0 0 10px;
+  color: #333;
+  line-height: 1.75;
+}
+
+.facultyListCard a {
+  color: #0d47b7;
+  font-weight: 700;
+}
+
+.researchDocPage {
+  padding: 24px 0 54px;
+  background: #ffffff;
+}
+
+.researchWideFrame {
+  width: calc(100vw - 120px);
+  max-width: 1680px;
+  margin: 0 auto;
+}
+
+.researchDocFrame {
+  background: white;
+  border: 0;
+  padding: 32px 48px 46px;
+}
+
+.researchDocHeader {
+  margin-bottom: 26px;
+  text-align: center;
+}
+
+.researchDocHeader h1 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+}
+
+.researchDocHeader p {
+  max-width: 960px;
+  margin: 0 auto;
+  color: #555;
+  line-height: 1.8;
+}
+
+.researchDocContent {
+  display: grid;
+  gap: 34px;
+}
+
+.researchDocSection {
+  padding: 24px 26px 28px;
+  background: linear-gradient(180deg, #fcfbf8 0%, #f8f6f1 100%);
+  border: 1px solid #ece7dd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.researchDocSectionHeading {
+  margin-bottom: 16px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.researchDocSectionHeading h2 {
+  display: inline-block;
+  margin: 0;
+  padding-bottom: 10px;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  border-bottom: 3px solid #b00000;
+}
+
+.researchDocList {
+  display: grid;
+  gap: 12px;
+}
+
+.researchDocList p {
+  margin: 0;
+  color: #2b2b2b;
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.collaborationTopicGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.collaborationTopicCard {
+  padding: 18px;
+  background: #faf8f4;
+  border: 1px solid #ece3d5;
+}
+
+.collaborationTopicCard h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+}
+
+.collaborationTopicCard p {
+  margin: 0;
+  color: #444;
+  line-height: 1.75;
+}
+
+.contactInfoBlock {
+  display: grid;
+  gap: 18px;
+}
+
+.contactInfoRow {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+
+.contactInfoIcon {
+  display: inline-grid;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  position: relative;
+}
+
+.contactInfoIcon.email::before {
+  content: "";
+  position: absolute;
+  inset: 6px 4px 10px 4px;
+  background: #2d2d2d;
+  border-radius: 3px;
+}
+
+.contactInfoIcon.email::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 13px;
+  height: 10px;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: skewY(-30deg);
+}
+
+.contactInfoIcon.location::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 3px;
+  width: 22px;
+  height: 22px;
+  background: #2d2d2d;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+}
+
+.contactInfoIcon.location::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: white;
+}
+
+.contactInfoLink {
+  color: #1d4d95;
+  font-weight: 600;
+}
+
+.contactInfoText {
+  color: #333;
+  line-height: 1.75;
+}
+
+.contactMapWrap {
+  overflow: hidden;
+  border: 1px solid #dadada;
+}
+
+.contactMapFrame {
+  display: block;
+  width: 100%;
+  height: 420px;
+  border: 0;
+}
+
+.contactMapFallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 420px;
+  color: #666;
+  background: #f5f5f5;
+}
+
+.researchPager {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.researchPagerButton {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #c6c6c6;
+  background: white;
+  color: #555;
+  cursor: pointer;
+}
+
+.researchPagerButton.active {
+  border-color: #9d0c11;
+  background: #9d0c11;
+  color: white;
+}
+
+.contactCard {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.contactCardHeader {
+  margin-bottom: 18px;
+}
+
+.contactCardHeader .sectionEyebrow {
+  display: none;
+}
+
+.contactCardHeader h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.contactCardHeader p {
+  margin: 0;
+  color: #555;
+  line-height: 1.75;
+}
+
+.contactForm input,
+.contactForm textarea {
+  border: 1px solid #d7ccb9;
+  background: #fffdf9;
+}
+
+.contactForm .primaryButton {
+  background: #9d0c11;
+  color: white;
+}
+
+.asideCard h2,
+.portraitCard h2,
+.memberCopy h4 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+}
+
+.portraitCard {
+  text-align: center;
+}
+
+.portraitPlaceholder {
+  display: grid;
+  place-items: center;
+  width: 140px;
+  height: 180px;
+  margin: 0 auto 18px;
+  background: var(--surface-muted);
+  border: 1px solid var(--line-strong);
+  color: var(--brand);
+  font-family: var(--font-display);
+  font-size: 2rem;
+}
+
+.plainMetaList,
+.footerList {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+}
+
+.infoGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.researchGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+}
+
+.tagList li {
+  padding: 6px 10px;
+  background: var(--surface-soft);
+  color: var(--brand);
+  font-size: 0.9rem;
+}
+
+.bulletCardGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.teachingStack {
+  display: grid;
+}
+
+.memberGroups {
+  display: grid;
+  gap: 28px;
+}
+
+.memberGroup {
+  padding: 28px;
+  background: var(--surface-soft);
+}
+
+.memberGroupHeader {
+  margin-bottom: 18px;
+}
+
+.memberGroupHeader h3 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.memberGroupHeader p {
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+}
+
+.memberCardGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.memberCard {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.memberAvatar {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: #ebe5db;
+  color: var(--brand);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.memberCopy h4 {
+  font-size: 1.2rem;
+}
+
+.memberRole {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.memberPageSections {
+  display: grid;
+  gap: 46px;
+}
+
+.memberPageSection {
+  display: grid;
+  gap: 22px;
+}
+
+.memberPageSectionHeader h2 {
+  display: inline-block;
+  margin: 0;
+  padding-bottom: 10px;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  border-bottom: 3px solid #b00000;
+}
+
+.memberPageSectionHeader {
+  border-bottom: 1px solid #d0d0d0;
+  padding-bottom: 2px;
+}
+
+.studentGroupStack {
+  display: grid;
+  gap: 28px;
+}
+
+.studentSubgroup h3 {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding-bottom: 8px;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  border-bottom: 2px solid #c98f8f;
+}
+
+.studentSubgroup {
+  display: grid;
+}
+
+.studentSubgroup h3 {
+  justify-self: center;
+}
+
+.miniMemberGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(340px, 1fr));
+  justify-content: stretch;
+  gap: 24px;
+}
+
+.miniMemberCard {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+  padding: 18px;
+  background: #f3f3f3;
+  border-radius: 14px;
+  border: 1px solid #ececec;
+}
+
+.miniMemberPhoto {
+  display: grid;
+  place-items: center;
+  width: 118px;
+  height: 100%;
+  min-height: 146px;
+  align-self: stretch;
+  background: #4f78ca;
+  color: #111;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.miniMemberPhotoImage {
+  display: block;
+  width: 118px;
+  height: 100%;
+  min-height: 146px;
+  object-fit: cover;
+}
+
+.miniMemberCard.tone-faculty {
+  background: #faf4ee;
+}
+
+.miniMemberCard.tone-phd {
+  background: #f8f1f0;
+}
+
+.miniMemberCard.tone-master {
+  background: #f6f1f7;
+}
+
+.miniMemberCard.tone-visiting {
+  background: #f1f4f8;
+}
+
+.miniMemberCard.tone-alumni {
+  background: #eef5f1;
+}
+
+.miniMemberCard.tone-collaborator {
+  background: #edf6f4;
+}
+
+.miniMemberContent h4 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  font-weight: 400;
+  text-align: left;
+}
+
+.miniMemberContent p {
+  margin: 0 0 6px;
+  color: #2a2a2a;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.teamSimplePage {
+  padding: 18px 0 56px;
+  background: #ffffff;
+}
+
+.teamWideFrame {
+  width: calc(100vw - 140px);
+  max-width: 1520px;
+  margin: 0 auto;
+}
+
+.teamSimpleFrame {
+  background: white;
+  border: 0;
+  padding: 28px 34px 40px;
+}
+
+.teamSimpleHeader {
+  margin-bottom: 34px;
+  text-align: center;
+}
+
+.teamSimpleHeader h1 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+}
+
+.teamSimpleHeader p {
+  max-width: 980px;
+  margin: 0 auto;
+  color: #555;
+  line-height: 1.85;
+}
+
+.newsTimeline {
+  display: grid;
+  gap: 24px;
+}
+
+.newsCard {
+  padding: 22px 0 24px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.newsCard:first-child {
+  padding-top: 0;
+}
+
+.newsCard:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.newsMeta {
+  display: flex;
+  gap: 12px 18px;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.newsCategory {
+  color: var(--brand);
+  font-weight: 700;
+}
+
+.newsContent {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: 24px;
+  align-items: start;
+  margin-top: 12px;
+}
+
+.newsThumb {
+  min-height: 122px;
+  background-position: center;
+  background-size: cover;
+}
+
+.admissionGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.requirementList {
+  margin: 18px 0 0;
+}
+
+.requirementRow {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.requirementRow:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.requirementRow dt {
+  color: var(--ink-soft);
+}
+
+.workflowList {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding-left: 24px;
+}
+
+.contactCardHeader {
+  margin-bottom: 18px;
+}
+
+.contactForm {
+  display: grid;
+  gap: 16px;
+}
+
+.contactForm label {
+  display: grid;
+  gap: 8px;
+}
+
+.contactForm span {
+  font-weight: 600;
+}
+
+.contactForm input,
+.contactForm textarea {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid var(--line-strong);
+  background: white;
+  color: var(--ink);
+}
+
+.contactForm textarea {
+  resize: vertical;
+}
+
+.contactForm small {
+  color: var(--brand);
+}
+
+.formStatus {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  font-size: 0.94rem;
+}
+
+.formStatus.idle {
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+}
+
+.formStatus.success {
+  background: #eef6ef;
+  color: #1f6d39;
+}
+
+.formStatus.error {
+  background: #fbeeee;
+  color: var(--brand);
+}
+
+.linkList {
+  display: grid;
+  gap: 12px;
+}
+
+.linkCard {
+  display: block;
+  padding: 14px 16px;
+  background: var(--surface-soft);
+}
+
+.linkCard strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.linkCard.disabled {
+  opacity: 0.88;
+}
+
+.emptyState {
+  background: var(--surface-soft);
+  border-style: dashed;
+}
+
+.emptyState strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.siteFooter {
+  padding: 22px 0 24px;
+  background: var(--brand);
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.8fr 0.9fr;
+  gap: 18px;
+}
+
+.siteFooter h2,
+.siteFooter h3,
+.siteFooter a {
+  color: white;
+}
+
+.footerIntro p,
+.footerMuted {
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.55;
+}
+
+.footerMuted {
+  margin-top: 8px;
+}
+
+.siteFooter h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.7rem, 2.2vw, 2.4rem);
+}
+
+.siteFooter h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.footerList {
+  margin-top: 2px;
+  padding-left: 18px;
+  line-height: 1.55;
+}
+
+.footerNavList {
+  columns: 2;
+  column-gap: 28px;
+}
+
+.footerNavList li {
+  break-inside: avoid;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 1100px) {
+  .siteHeaderInner,
+  .splitShowcase,
+  .pageHeroInner,
+  .pageBodyGrid,
+  .footerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .siteHeaderInner {
+    min-height: 56px;
+    padding: 6px 0;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .mobileMenu {
+    display: block;
+  }
+
+  .mobileMenu summary {
+    list-style: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  .mobileMenu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobileMenuPanel {
+    display: grid;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--brand-deep);
+  }
+
+  .mobileNavLink {
+    display: grid;
+    gap: 4px;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 10px 12px;
+  }
+
+  .mobileNavLink small {
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .mobileNavLink.active {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .pageAside {
+    position: static;
+  }
+
+  .profileLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .quickLinkGrid,
+  .highlightGrid,
+  .researchGrid,
+  .bulletCardGrid,
+  .admissionGrid,
+  .memberCardGrid,
+  .facultyListGrid,
+  .miniMemberGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+  .container {
+    width: min(100vw - 24px, 1220px);
+  }
+
+  .homeHero {
+    padding-bottom: 24px;
+  }
+
+  .profilePage {
+    padding: 18px 0 54px;
+  }
+
+  .researchDocPage {
+    padding: 18px 0 42px;
+  }
+
+  .profileContentArea {
+    padding: 22px 20px 28px;
+  }
+
+  .researchDocFrame {
+    padding: 22px 18px 30px;
+  }
+
+  .researchDocSection {
+    padding: 18px 16px 22px;
+  }
+
+  .profileActionGrid,
+  .facultyListGrid,
+  .miniMemberGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .homeHeroCaption {
+    top: 28%;
+    width: min(92%, 560px);
+  }
+
+  .homeHeroCaption h1 {
+    font-size: clamp(1.9rem, 9vw, 2.9rem);
+  }
+
+  .homeHeroCaption p {
+    font-size: 0.96rem;
+  }
+
+  .homeHeroButton {
+    min-width: 160px;
+    min-height: 42px;
+    margin-top: 18px;
+  }
+
+  .homeHeroImage {
+    height: 62vh;
+  }
+
+  .footerNavList {
+    columns: 1;
+  }
+
+  .heroCarousel {
+    min-height: 78vh;
+  }
+
+  .heroContent {
+    min-height: 78vh;
+    padding: 100px 0 88px;
+  }
+
+  .heroCopy h1,
+  .pageHeroCopy h1 {
+    font-size: clamp(2.4rem, 12vw, 3.4rem);
+  }
+
+  .heroArrow {
+    width: 48px;
+    height: 48px;
+    margin-top: -24px;
+    font-size: 3.4rem;
+  }
+
+  .heroArrowLeft {
+    left: 8px;
+  }
+
+  .heroArrowRight {
+    right: 8px;
+  }
+
+  .sectionBlock,
+  .homeSections {
+    padding-bottom: 40px;
+  }
+
+  .quickLinkGrid,
+  .statGrid,
+  .ctaGrid,
+  .highlightGrid,
+  .researchGrid,
+  .placeholderGrid,
+  .bulletCardGrid,
+  .admissionGrid,
+  .infoGrid,
+  .memberCardGrid,
+  .newsContent {
+    grid-template-columns: 1fr;
+  }
+
+  .memberCard {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .memberAvatar {
+    width: 72px;
+    height: 72px;
+  }
+}
